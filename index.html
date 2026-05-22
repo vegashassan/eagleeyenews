@@ -132,27 +132,38 @@ Establishing Secure Intelligence Link...
 
 <!-- LOGO -->
 
-            <div class="flex items-center gap-4 cursor-pointer group" onclick="showPage('home'); clearSearch(); updateNavActive(null);">
-                <i class="fa-solid fa-eye text-3xl text-eagleGold transition-transform group-hover:scale-110"></i>
+<div class="flex items-center gap-3 cursor-pointer group"
+onclick="showPage('home'); clearSearch(); updateNavActive(null);">
 
-                <div class="leading-none">
-                    <h1 class="text-2xl md:text-4xl font-black tracking-tighter uppercase leading-none" id="site-display-name">
-                        Eagle Eye <span class="text-eagleGold">News</span>
-                    </h1>
+<i class="fa-solid fa-eye text-3xl text-eagleGold transition-transform group-hover:scale-110"></i>
 
-                    <span class="text-[9px] tracking-[0.4em] font-light text-eagleGold/60 uppercase">
-                        Intelligence Terminal
-                    </span>
-                </div>
-            </div>
+<div class="leading-none">
 
+<h1 class="text-2xl md:text-4xl font-black tracking-tighter uppercase leading-none">
 
+Eagle Eye <span class="text-eagleGold">News</span>
+
+</h1>
+
+<span class="text-[8px] md:text-[9px] tracking-[0.35em] font-light text-eagleGold/60 uppercase">
+
+Intelligence Terminal
+
+</span>
+
+</div>
+
+</div>
 
 <!-- DESKTOP NAV -->
 
 <nav class="hidden lg:flex items-center gap-8" id="main-nav"></nav>
 
-<!-- SEARCH -->
+<!-- RIGHT SIDE -->
+
+<div class="flex items-center gap-4">
+
+<!-- DESKTOP SEARCH -->
 
 <div class="relative hidden md:block">
 
@@ -164,7 +175,30 @@ class="bg-white/5 border border-white/10 rounded-full px-5 py-2 text-xs w-64 foc
 
 </div>
 
-<!-- MOBILE BUTTON -->
+<!-- MOBILE SEARCH -->
+
+<div class="md:hidden relative">
+
+<button onclick="toggleSearch()" class="text-xl text-eagleGold">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+</button>
+
+<div id="mobile-search-box"
+class="hidden absolute right-0 top-14 bg-navy border border-white/10 p-3 rounded-xl shadow-2xl w-72 z-50">
+
+<input
+type="text"
+id="mobile-search-input"
+placeholder="Query Intel Archive..."
+class="w-full bg-white/5 border border-white/10 rounded-full px-4 py-3 text-xs text-white focus:bg-white focus:text-navy outline-none">
+
+</div>
+
+</div>
+
+<!-- MOBILE MENU BUTTON -->
 
 <button onclick="toggleMobileMenu()" class="lg:hidden text-2xl text-eagleGold">
 
@@ -176,11 +210,15 @@ class="bg-white/5 border border-white/10 rounded-full px-5 py-2 text-xs w-64 foc
 
 </div>
 
+</div>
+
 <!-- MOBILE NAV -->
 
-<div id="mobile-menu" class="hidden lg:hidden bg-navy border-t border-white/10 px-4 py-6">
+<div id="mobile-menu"
+class="hidden lg:hidden bg-navy border-t border-white/10 px-4 py-6">
 
-<div id="mobile-nav" class="flex flex-col gap-5 text-sm font-black uppercase tracking-widest"></div>
+<div id="mobile-nav"
+class="flex flex-col gap-5 text-sm font-black uppercase tracking-widest"></div>
 
 </div>
 
@@ -591,7 +629,7 @@ const top = news[0];
 hero.onclick = ()=> readArticle(top.id);
 
 hero.innerHTML = `
-<div class="relative h-[600px]">
+<div class="relative h-[500px]">
 
 <img src="${top.image}"
 class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-all duration-1000">
@@ -604,7 +642,7 @@ class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-al
 Primary Focus
 </span>
 
-<h2 class="text-5xl font-black text-white leading-tight tracking-tighter mb-5">
+<h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-white leading-tight tracking-tighter mb-5">
 ${top.title}
 </h2>
 
@@ -949,6 +987,33 @@ document.getElementById('mobile-menu')
 .classList.toggle('hidden');
 
 }
+
+function toggleSearch(){
+
+document.getElementById('mobile-search-box')
+.classList.toggle('hidden');
+
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{
+
+const mobileInput = document.getElementById('mobile-search-input');
+
+if(mobileInput){
+
+mobileInput.addEventListener('input', function(){
+
+document.getElementById('search-input').value = this.value;
+
+const event = new Event('input');
+
+document.getElementById('search-input').dispatchEvent(event);
+
+});
+
+}
+
+});
 
 window.addEventListener('scroll', ()=>{
 
