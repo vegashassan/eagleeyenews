@@ -549,7 +549,7 @@ image:item.image || '',
 lede:item.lede || '',
 body:item.body || item.lede || '',
 author:item.author || 'Eagle Eye Desk',
-date:new Date(item.event_date)
+date:new Date(item.created_at)
 }))
 .sort((a,b)=>b.date-a.date);
 
