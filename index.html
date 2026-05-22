@@ -2,6 +2,10 @@
 <html lang="en" class="scroll-smooth">
 <head>
 <meta charset="UTF-8">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Eagle Eye News">
+<meta property="og:description" content="Precision Intelligence & Breaking Reports">
+<meta property="og:image" content="/logo.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Eagle Eye News | Precision Intelligence</title>
 
@@ -901,11 +905,21 @@ showPage('category');
 
 }
 
-function readArticle(id){
+function readArticle(id, updateUrl = true){
 
 const a = articles.find(x => x.id === id);
 
 if(!a) return;
+
+// UPDATE URL
+if(updateUrl){
+
+const url =
+`${window.location.pathname}?article=${id}`;
+
+window.history.pushState({}, '', url);
+
+}
 
 document.getElementById('full-cat').textContent = a.cat;
 
@@ -913,17 +927,33 @@ document.getElementById('full-title').textContent = a.title;
 
 document.getElementById('full-media').innerHTML = `
 
-<div class="mb-6 flex flex-wrap items-center gap-4 text-[11px] uppercase tracking-widest text-slate-500 font-black">
+<div class="mb-6 flex flex-wrap items-center justify-between gap-4">
 
-<span>
-<i class="fa-solid fa-user mr-1"></i>
-${a.author}
-</span>
+  <!-- AUTHOR + DATE -->
+  <div class="flex flex-wrap items-center gap-4 text-[11px] uppercase tracking-widest text-slate-500 font-black">
 
-<span>
-<i class="fa-solid fa-clock mr-1"></i>
-${a.date.toDateString()}
-</span>
+    <span>
+      <i class="fa-solid fa-user mr-1"></i>
+      ${a.author}
+    </span>
+
+    <span>
+      <i class="fa-solid fa-clock mr-1"></i>
+      ${a.date.toDateString()}
+    </span>
+
+  </div>
+
+  <!-- SHARE BUTTON -->
+  <button
+    onclick="shareArticle()"
+    class="bg-eagleRed hover:bg-red-700 text-white px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2">
+
+    <i class="fa-solid fa-share-nodes"></i>
+
+    Share
+
+  </button>
 
 </div>
 
@@ -942,6 +972,35 @@ a.body.includes('<p>')
 showPage('article');
 
 }
+
+
+function shareArticle(){
+
+const url = window.location.href;
+
+const title =
+document.getElementById('full-title').textContent;
+
+// MOBILE SHARE
+if(navigator.share){
+
+navigator.share({
+title: title,
+text: 'Read this article from Eagle Eye News',
+url: url
+});
+
+}else{
+
+// DESKTOP FALLBACK
+navigator.clipboard.writeText(url);
+
+alert('Article link copied to clipboard!');
+
+}
+
+}
+
 
 function showPage(name){
 
@@ -970,6 +1029,8 @@ text + ' — ' + text;
 }
 
 function goBack(){
+
+window.history.pushState({}, '', window.location.pathname);
 
 showPage('home');
 
@@ -1032,7 +1093,20 @@ scrolled + '%';
 
 });
 
-boot();
+boot().then(() => {
+
+const params =
+new URLSearchParams(window.location.search);
+
+const articleId = params.get('article');
+
+if(articleId){
+
+readArticle(Number(articleId), false);
+
+}
+
+});
 
 </script>
 
