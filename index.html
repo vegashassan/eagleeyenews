@@ -367,22 +367,21 @@ class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
 
 <div>
 
-<div class="flex items-center gap-3 mb-5">
+<div class="flex items-center gap- mb-5">
 
-<img src="https://cdn-icons-png.flaticon.com/512/3069/3069172.png"
-class="w-10 h-10 object-contain">
+           <div class="flex items-center gap-3 cursor-pointer group" onclick="showPage('home'); clearSearch(); updateNavActive(null);">
+                <i class="fa-solid fa-eye text-3xl text-eagleGold transition-transform group-hover:scale-110"></i>
 
-<div>
+                <div class="leading-none">
+                    <h1 class="text-2xl md:text-2xl font-black tracking-tighter uppercase leading-none" id="site-display-name">
+                        Eagle Eye <span class="text-eagleGold">News</span>
+                    </h1>
 
-<h3 class="text-2xl font-black uppercase tracking-tighter">
-Eagle Eye
-</h3>
-
-<p class="text-[9px] uppercase tracking-[0.3em] text-eagleGold/60">
-Intelligence Network
-</p>
-
-</div>
+                    <span class="text-[7px] tracking-[0.4em] font-light text-eagleGold/60 uppercase">
+                        Intelligence Terminal
+                    </span>
+                </div>
+            </div>
 
 </div>
 
