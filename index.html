@@ -976,10 +976,11 @@ class="w-full h-auto rounded-2xl">
 `;
 
 document.getElementById('full-body').innerHTML =
-a.body.includes('<p>')
+a.body && a.body.includes('<p>')
 ? a.body
-: a.body.split('\n\n')
-.map(p => `<p class="mb-4">${p}</p>`)
+: (a.body || '')
+.split(/\n\s*\n/)
+.map(p => `<p class="mb-6 leading-8 text-[17px] text-slate-800">${p.trim()}</p>`)
 .join('');
 
 showPage('article');
