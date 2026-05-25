@@ -35,6 +35,8 @@ serif: ['Fraunces', 'serif']
 }
 </script>
 
+<!-- REPLACE ONLY THIS ENTIRE SECTION INSIDE YOUR <style> TAG -->
+
 <style>
 
 [x-cloak] {
@@ -81,14 +83,25 @@ transform:translate3d(-50%,0,0);
 }
 }
 
+/* REMOVE BIG FIRST LETTER */
+
 .dropcap::first-letter{
-float:left;
-font-size:4rem;
-line-height:1;
-font-weight:900;
-padding-right:.5rem;
-color:#011433;
-font-family:'Fraunces',serif;
+float:none;
+font-size:inherit;
+line-height:inherit;
+font-weight:inherit;
+padding-right:0;
+color:inherit;
+font-family:inherit;
+}
+
+/* CLEAN ARTICLE PARAGRAPHS */
+
+.prose p{
+margin-bottom:1.8rem;
+line-height:2rem;
+font-size:17px;
+color:#1e293b;
 }
 
 </style>
