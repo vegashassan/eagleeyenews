@@ -81,25 +81,14 @@ transform:translate3d(-50%,0,0);
 }
 }
 
-/* UPDATED ARTICLE STYLE */
-
 .dropcap::first-letter{
-float:none;
-font-size:inherit;
-line-height:inherit;
-font-weight:inherit;
-padding-right:0;
-color:inherit;
-font-family:inherit;
-}
-
-/* CLEAN ARTICLE PARAGRAPHS */
-
-.prose p{
-margin-bottom:1.8rem;
-line-height:2rem;
-font-size:17px;
-color:#1e293b;
+float:left;
+font-size:4rem;
+line-height:1;
+font-weight:900;
+padding-right:.5rem;
+color:#011433;
+font-family:'Fraunces',serif;
 }
 
 </style>
@@ -976,14 +965,13 @@ class="w-full h-auto rounded-2xl">
 document.getElementById('full-body').innerHTML =
 a.body.includes('<p>')
 ? a.body
-: a.body
-.split(/\n\s*\n/)
-.map(p => `
-<p class="mb-6 leading-8 text-[17px] text-slate-800">
-${p.trim()}
-</p>
-`)
+: a.body.split('\n\n')
+.map(p => `<p class="mb-4">${p}</p>`)
 .join('');
+
+showPage('article');
+
+}
 
 
 function shareArticle(){
